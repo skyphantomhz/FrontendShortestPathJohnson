@@ -1,0 +1,58 @@
+<!--<form class="ui large form segment">
+    <h3 class="ui header">Find shortest path</h3>
+    <div class="field">
+        <label for="title">Enter number of vertices</label>
+        <input name="title" #newvertices>
+    </div>
+    <button (click)="inputVertices(newvertices)"
+        class="ui positive right floated button">
+        Submit
+    </button>
+</form>
+
+<h3 class="ui header">Input Adjacency Matrix</h3>
+
+<form [formGroup]="testForm"  (ngSubmit)="doTest(testForm.value, testForm.valid)">
+    <table>
+        <tr *ngFor="let row of indexFormControl">
+                <input formControlName="{{ row }}" value="{{ row }}" />
+        </tr>
+    </table>
+    <button type="submit">Test</button>
+</form>
+
+-->
+
+<div class="container">
+    <form [formGroup]="trustForm" novalidate (ngSubmit)="find(trustForm)">
+        <h3>Shortest Path</h3>
+
+        <div class="form-group">
+            <label>Input Vertices</label>
+            <input type="text" class="form-control" #newvertices>
+            <input type="button" (click)="addRow(newvertices)"  value="Init"/>
+        </div>
+
+        <!--rows-->
+        <table formArrayName="rows">
+            <tr *ngFor="let row of trustForm.controls.rows.controls; let i=index" class="panel panel-default">
+                <div class="panel-body" [formGroupName]="i">
+                    <cols [group]="trustForm.controls.rows.controls[i]" [numberofvertices]="numberofvertices"></cols>
+                </div>
+            </tr>
+        </table>
+
+        <div class="margin-20">
+            <button class="btn btn-primary" [disabled]="!trustForm.valid">
+                Find Shortest Path
+            </button>
+        </div>
+
+        <h5>Result</h5>
+        <pre *ngIf="submitted">{{result}}</pre>
+
+        <!--<h5>Details</h5>
+        <pre>{{ trustForm.value | json }}</pre>-->
+
+    </form>
+</div>

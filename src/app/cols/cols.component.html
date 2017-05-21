@@ -1,0 +1,13 @@
+<div [formGroup]="contractGroup">
+    <!--cols-->
+    <div formArrayName="cols">
+        <td *ngFor="let col of contractGroup.controls.cols.controls; let i=index" class="panel panel-default">
+            <div class="panel-body" [formGroupName]="i">
+                <input type="text" class="form-control" formControlName="num">
+                <small [hidden]="col.controls.num.valid" class="text-danger">
+                    Num is required
+                </small>
+            </div>
+        </td>
+    </div>
+</div>
